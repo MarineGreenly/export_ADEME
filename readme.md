@@ -1,12 +1,10 @@
+# Crédit
+
+Ce code est issu d'un débuggage et de légères modifications du code initial du collectif Lou Dupont. Le code source est libre d'utilisation et est disponible [ici](https://github.com/lou-dupont).
+
 # Consolidation des bilans GES de l'ADEME
 
-Ce code sert à consolider les bilans d'émissions de gaz à effet de serre publiés sur le site de l'ADEME par les enterprises ou organisations françaises. Voir la description ci-dessous pour en savoir plus sur le contexte et le contenu. Les données consolidées sont ensuite rendues disponibles sur le site [data.gouv.fr](https://www.data.gouv.fr/fr/datasets/bilans-demissions-de-ges-publies-sur-le-site-de-lademe-1/).
-
-## Paramétrage du téléversement vers la plateforme
-
-Pour sauvegarder vers [data.gouv.fr](data.gouv.fr), il faut une clef API (qui est secrète). Le mode d'emploi est :
-* créer un fichier `params.py` au même niveau que le code `main.py`,
-* dans ce fichier, saisir la clef au format `X_API_KEY = "ma_clef_api"`.
+Ce code sert à consolider les bilans d'émissions de gaz à effet de serre publiés sur le site de l'ADEME par les enterprises ou organisations françaises. Voir la description ci-dessous pour en savoir plus sur le contexte et le contenu. 
 
 ## Mode d'emploi manuel
 
@@ -14,7 +12,6 @@ Le traitement est séparé en trois scripts à dérouler dans l'ordre suivant :
 
 1. `download.py` télécharge l'ensemble des pages HTML concernant les bilans GES saisis sur la plateforme,
 2. `parse.py` interprête les fichiers HTML pour en extraire les données et les consolider aux formats CSV et Excel,
-3. `upload.py` automatise la sauvegarde vers la plateforme de données ouvertes (optionnel, nécessite la clef API).
 
 Les fichiers HTML sont stockés par le premier script et lus par le deuxième script dans un dossier à choisir (par défaut `./html/`). Les fichiers de sorties sont générés dans un dossier à choisir (par défaut `./output/`).
 
@@ -94,9 +91,9 @@ Le fichier **assessments.csv** (ou l'onglet **assessments** du fichier Excel) d�
 
 Le fichier **legal_units.csv** (ou l'onglet **legal_units** du fichier Excel) décrit les unités légales (les personnes morales ou leurs établissements) concernées par chaque bilan. Chaque bilan peut être lié à zéro (c'est fréquemment le cas pour l'État ou les collectivités territoriales), une ou plusieurs unités légales. Il comporte les colonnes suivantes :
 * `assessment_id` : identifiant du bilan par lequel l'unité légale est concernée,
-* `legal_unit_id_type` : type d'identifiant pour l'unité légale (*SIREN* pour une organisation ou **SIRET** pour un établissement),
-* `legal_unit_id` : valeur de l'identifiant (9 ou 14 chiffres), à recouper avec la [base SIRENE de l'INSEE](https://www.data.gouv.fr/fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret/).
-
+* `legal_unit_id_type` : type d'identifiant pour l'unité légale (*SIREN* pour une organisation ou **SIRET** pour un établissement ou code NAF dès que disponible),
+* `legal_unit_id` : valeur de l'identifiant (9 ou 14 chiffres)
+*
 #### Émissions détaillées
 
 Le fichier **emissions.csv** (ou l'onglet **emissions** du fichier Excel) décrit les émissions par poste de chaque bilan. Il comporte les colonnes suivantes : 
